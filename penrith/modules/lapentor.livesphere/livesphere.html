@@ -1,0 +1,13 @@
+<div id="LiveSphereViewer" ng-show="!vm.project.password.enable || (vm.project.password.enable && vm.activePass)">
+    <scene-list ng-if="!vm.project.password.enable || (vm.project.password.enable && vm.activePass)" project="vm.project" lptsphereinstance="vm.lptSphereInstance" scene="vm.scene"></scene-list>
+    <controlbar ng-if="!vm.project.password.enable || (vm.project.password.enable && vm.activePass)" project="vm.project" lptsphereinstance="vm.lptSphereInstance" scene="vm.scene"></controlbar>
+    <hotspot style="display: none" ng-if="!vm.project.password.enable || (vm.project.password.enable && vm.activePass)" ng-repeat="hotspot in vm.hotspots" hotspot="hotspot" scene="vm.scene" project="vm.project" lptsphereinstance="vm.lptSphereInstance"></hotspot>
+    <plugin ng-if="!vm.project.password.enable || (vm.project.password.enable && vm.activePass)" ng-if="vm.project.plugins" ng-repeat="plugin in vm.project.plugins" plugin="plugin" project="vm.project" lptsphereinstance="vm.lptSphereInstance" scene="vm.scene"></plugin>
+</div>
+<div ng-if="vm.project.password.enable && !vm.activePass" id="LiveSpherePasswordWrap">
+    <div class="inner">
+        <input type="password" class="form-control" ng-model="vm.live_pass" placeholder="Enter password here" ng-keyup="$event.keyCode == 13 && vm.checkPass()">
+        <button class="btn btn-line" ng-click="vm.checkPass()">View project</button>
+    </div>
+    <fluid-loading ng-if="vm.checkPassIsLoading" type="opaque"></fluid-loading>
+</div>
